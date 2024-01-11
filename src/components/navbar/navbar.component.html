@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <ul>
+      <li>
+        <a routerLink="/">Home</a>
+      </li>
+      <li>
+        <a routerLink="/tours">Wycieczki</a>
+      </li>
+      <li>
+        <a routerLink="/add-tour">Dodaj Wycieczkę</a>
+      </li>
+    </ul>
+    <div class="right-section">
+      <div class="currency-selector">
+        <label for="currency">Waluta:</label>
+        <select id="currency" [(ngModel)]="selectedCurrency" (change)="onCurrencyChange()">
+          <option *ngFor="let currency of currencyService.currencies" [value]="currency">{{ currency }}</option>
+        </select>
+      </div>
+        <a routerLink="/cart">
+            <img src="../../assets/cart.svg" alt="koszyk">
+        </a>
+    </div>
+  </nav>
+  

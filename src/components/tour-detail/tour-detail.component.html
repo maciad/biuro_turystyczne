@@ -1,0 +1,12 @@
+<div *ngIf="tour">
+    <h2>{{ tour.name }}</h2>
+    <p>Description: {{ tour.description }}</p>
+    <p>Price: {{ tour.price_pln }}</p>
+    <p>Destination: {{ tour.destination }}</p>
+    <!-- Dodaj inne pola szczegółów wycieczki, jeśli są dostępne -->
+    <p>Available spots: {{ tour.max_visitors - tour.current_visitors }}</p>
+</div>
+  
+  <div *ngIf="!tour">
+    <p>Loading tour details...</p>
+  </div>
