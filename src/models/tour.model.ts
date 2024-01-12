@@ -12,4 +12,5 @@ export interface Tour {
     max_visitors: number;
     current_visitors: number;
     rating: [number, number];
+    isSelected?: boolean;
 }

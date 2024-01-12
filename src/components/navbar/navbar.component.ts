@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,8 @@ export class NavbarComponent implements OnInit {
   selectedCurrency = 'PLN';
   
   constructor(
-    public currencyService: CurrencyService
+    public currencyService: CurrencyService,
+    public cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -23,4 +25,7 @@ export class NavbarComponent implements OnInit {
     this.currencyService.changeCurrency(this.selectedCurrency);
   }
 
+  getNumberOfItemsInCart() {
+    return this.cartService.getItems().length;
+  }
 }

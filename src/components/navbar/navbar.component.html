@@ -17,10 +17,12 @@
           <option *ngFor="let currency of currencyService.currencies" [value]="currency">{{ currency }}</option>
         </select>
       </div>
-        <a routerLink="/cart">
-          <img src="../../assets/cart.svg" alt="koszyk">
-        </a>
-        <app-cart-navbar></app-cart-navbar>
-      </div>
+      <a routerLink="/cart">
+        <img src="../../assets/cart.svg" alt="koszyk">
+      </a>
+      <app-cart-navbar 
+        [ngStyle]="{'background-color': getNumberOfItemsInCart() < 10 ? 'red' : 'green'}">
+      </app-cart-navbar>
+    </div>
   </nav>
   

@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { CartService } from '../../services/cart/cart.service';
+import { ReservationService } from '../../services/reservation/reservation.service';
 
 @Component({
   selector: 'app-tours',
@@ -28,12 +29,14 @@ export class ToursComponent implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private currencyService: CurrencyService,
-    private cartService: CartService
+    private cartService: CartService,
+    private reservationService: ReservationService
   ) { }
   
   ngOnInit(): void {
     this.loadTours();
     this.subscribeToCurrencyChange();
+    console.log(this.cartService.getItems());
   }
 
   loadTours(): void {
@@ -45,13 +48,17 @@ export class ToursComponent implements OnInit {
   }
 
   addToCart(tour: Tour): void {
-    this.cartService.addToCart(tour);
+    this.reservationService.addToCart(tour);
     console.log(this.cartService.getItems());
   }
 
   removeFromCart(tour: Tour): void {
-    this.cartService.removeFromCart(tour);
+    this.reservationService.removeFromCart(tour);
     console.log(this.cartService.getItems());
+  }
+
+  getNumberOfItemsInCart(tour: Tour): number {
+    return this.cartService.getNumberOfItemsInCart(tour);
   }
   
   getFilteredPriceRange(originalPriceRange: { min: number, max: number }): { min: number, max: number } {
@@ -65,15 +72,13 @@ export class ToursComponent implements OnInit {
   }
 
   updateDisplayedTours(): void {
-
     this.filteredTours = this.filterTours(this.tours, this.filterCriteria);
-    const selectedCurrency = this.currencyService.getSelectedCurrency();
     const startIndex = (this.currentPage - 1) * this.pageSize;
     this.displayedTours = this.filteredTours
     .slice(startIndex, startIndex + this.pageSize)
     .map((tour) => ({
       ...tour,
-      convertedPrice: this.currencyService.convertPrice(tour.price_pln, selectedCurrency)
+      convertedPrice: this.currencyService.convertPrice(tour.price_pln, this.currencyService.getSelectedCurrency())
     }));
   }
 
@@ -96,12 +101,22 @@ export class ToursComponent implements OnInit {
     });
   }
 
+  getCurrency(): string {
+    return this.currencyService.getSelectedCurrency();
+  }
+
   getMinPrice(): number {
-    return Math.min(...this.filteredTours.map((tour) => tour.price_pln));
+    return Math.min(...this.filteredTours
+      .map((tour) => this.currencyService
+      .convertPrice(tour.price_pln, this.currencyService.getSelectedCurrency())
+      ));
   }
 
   getMaxPrice(): number {
-    return Math.max(...this.filteredTours.map((tour) => tour.price_pln));
+    return Math.max(...this.filteredTours
+      .map((tour) => this.currencyService
+      .convertPrice(tour.price_pln, this.currencyService.getSelectedCurrency())
+      ));
   }
 
   onFilterChanged(filterCriteria: any): void {

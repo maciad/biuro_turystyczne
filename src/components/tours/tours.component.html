@@ -15,13 +15,27 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Destination:</strong> {{ tour.destination }}</li>
             <li class="list-group-item"><strong>Dates:</strong> {{ tour.start_date.seconds*1000 | date }} - {{ tour.end_date.seconds*1000 | date }}</li>
-            <li class="list-group-item"><strong>Cena:</strong> {{ tour.convertedPrice }}</li>
-            <li class="list-group-item"><strong>Pozostałe miejsca:</strong> {{ tour.max_visitors - tour.current_visitors }}</li>
+            <li class="list-group-item"><strong>Cena:</strong> {{ tour.convertedPrice }} {{ this.getCurrency() }}</li>
+            <li class="list-group-item"><strong>Pozostałe miejsca:</strong> {{ tour.max_visitors - tour.current_visitors -  this.getNumberOfItemsInCart(tour) }}</li>
           </ul>
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <button (click)="addToCart(tour)">+</button>
-            <button (click)="removeFromCart(tour)">-</button>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-info"
+                [ngStyle]="{
+                  'background-color': tour.max_visitors - tour.current_visitors - this.getNumberOfItemsInCart(tour) > 0 ?
+                     (tour.max_visitors - tour.current_visitors - this.getNumberOfItemsInCart(tour) < 4 ? 'red' : '') : 'transparent',
+                  'display': tour.max_visitors - tour.current_visitors - this.getNumberOfItemsInCart(tour) > 0 ? 'inline-block' : 'none'
+                }"
+                (click)="addToCart(tour)">+
+              </button>
+            </div>
+          
+            <button class="btn btn-info"
+              (click)="removeFromCart(tour)"
+              [ngStyle]="{ 'display': getNumberOfItemsInCart(tour) > 0 ? 'inline-block' : 'none' }"
+            >-</button>
           </div>
+          
         </div>
       </div>
     </div>
