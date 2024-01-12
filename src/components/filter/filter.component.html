@@ -1,0 +1,34 @@
+<div class="filter-bar">
+
+    <div>
+        <label for="location">Location:</label>
+        <input type="text" id="location" [(ngModel)]="filterCriteria.location" />
+    </div>
+    
+    <div>
+        <label for="priceMin">Min Price:</label>
+        <input type="number" id="priceMin" [(ngModel)]="filterCriteria.priceRange.min" [placeholder]="this.minPrice"/>
+    </div>
+    
+    <div>
+        <label for="priceMax">Max Price:</label>
+        <input type="number" id="priceMax" [(ngModel)]="filterCriteria.priceRange.max" [placeholder]="this.maxPrice"/>
+    </div>
+    
+    <div>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" [(ngModel)]="filterCriteria.dateRange.start" />
+    </div>
+    
+    <div>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" [(ngModel)]="filterCriteria.dateRange.end" />
+    </div>
+    
+    <div>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" [(ngModel)]="filterCriteria.rating" />
+    </div>
+    
+    <button (click)="applyFilter()">Apply Filter</button>
+</div>

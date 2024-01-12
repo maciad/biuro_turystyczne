@@ -5,6 +5,8 @@
     <p>Destination: {{ tour.destination }}</p>
     <!-- Dodaj inne pola szczegółów wycieczki, jeśli są dostępne -->
     <p>Available spots: {{ tour.max_visitors - tour.current_visitors }}</p>
+
+    <button *ngIf="tour.id" (click)="firestoreService.deleteDocument('wycieczki', tour.id).then(redirectToTours)" >Usuń wycieczkę</button>
 </div>
   
   <div *ngIf="!tour">

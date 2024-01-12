@@ -1,11 +1,15 @@
+<app-filter (filterChanged)="onFilterChanged($event)" [maxPrice]="this.getMaxPrice()" [minPrice]="this.getMinPrice()"></app-filter>
 <div class="container">
+
   <div class="row">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let tour of displayedTours">
-      <div class="card mb-3">
+      <div class="card mb-3" [ngClass]="{
+        'cheapest-tour': tour.price_pln === getMinPrice(),
+        'most-expensive-tour': tour.price_pln === getMaxPrice()
+      }">
         <!-- <img [src]="tour.imageLink" class="card-img-top" alt="Tour Image"> -->
         <div class="card-body">
           <h5 class="card-title">{{ tour.name }}</h5>
-          <!-- <p class="card-text">ID :{{tour.id}}</p> -->
           <p class="card-text">{{ tour.description }}</p>
           <button class="btn btn-primary" [routerLink]="['/tours', tour.id]">Show Details</button>
           <ul class="list-group list-group-flush">
@@ -15,8 +19,8 @@
             <li class="list-group-item"><strong>Pozostałe miejsca:</strong> {{ tour.max_visitors - tour.current_visitors }}</li>
           </ul>
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <!-- <button class="btn btn-success" (click)="reserveTour(tour)">+</button>
-            <button class="btn btn-danger" (click)="cancelReservation(tour)">-</button> -->
+            <button (click)="addToCart(tour)">+</button>
+            <button (click)="removeFromCart(tour)">-</button>
           </div>
         </div>
       </div>
@@ -24,7 +28,7 @@
   </div>
 
   <mat-paginator 
-    [length]="tours.length" 
+    [length]="totalItems" 
     [pageSize]="pageSize" 
     [pageIndex]="currentPage - 1"
     [pageSizeOptions]="[3, 6, 9]"

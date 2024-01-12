@@ -43,4 +43,8 @@ export class FirestoreService {
   addDocument(collectionName: string, data: any) {
     return this.firestore.collection(collectionName).add(data);
   }
+
+  deleteDocument(collectionName: string, documentId: string) {
+    return this.firestore.collection(collectionName).doc(documentId).delete();
+  }
 }

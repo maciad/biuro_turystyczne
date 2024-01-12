@@ -5,3 +5,11 @@
 .row div {
     margin: 10px 0;
 }
+
+.cheapest-tour {
+    border: 2px solid red;
+}
+
+.most-expensive-tour {
+    border: 2px solid green;
+}

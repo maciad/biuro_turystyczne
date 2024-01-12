@@ -21,6 +21,8 @@ import { HistoryComponent } from '../components/history/history.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { AddTourComponent } from '../components/add-tour/add-tour.component';
 import { FormsModule } from '@angular/forms';
+import { FilterComponent } from '../components/filter/filter.component';
+import { CartNavbarComponent } from '../components/cart-navbar/cart-navbar.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -43,6 +45,8 @@ const appRoutes: Routes = [
     HistoryComponent,
     NavbarComponent,
     AddTourComponent,
+    FilterComponent,
+    CartNavbarComponent,
   ],
   imports: [
     FormsModule,

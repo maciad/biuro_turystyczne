@@ -8,11 +8,11 @@ import { Tour } from '../../models/tour.model';
   templateUrl: './tour-detail.component.html',
   styleUrl: './tour-detail.component.css'
 })
-export class TourDetailComponent {
+export class TourDetailComponent implements OnInit {
   tourId: string = '';
   tour: Tour | undefined;
 
-  constructor(private route: ActivatedRoute, private firestoreService: FirestoreService ) {}
+  constructor(private route: ActivatedRoute, protected firestoreService: FirestoreService ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -24,6 +24,10 @@ export class TourDetailComponent {
         });
       }
     });
+  }
+
+  redirectToTours() {
+    window.location.href = '/tours';
   }
 
 }
