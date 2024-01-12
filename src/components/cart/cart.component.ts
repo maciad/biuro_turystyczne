@@ -88,6 +88,7 @@ export class CartComponent implements OnInit {
     this.cartService.buySelectedTours();
     this.updatePrices();
     this.updateDistinctTours();
+    // this.cartService.addToHistory();
   }
 
 }

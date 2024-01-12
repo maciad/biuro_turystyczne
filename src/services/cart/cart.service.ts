@@ -3,6 +3,7 @@ import { Tour } from '../../models/tour.model';
 import { Subject } from 'rxjs';
 import { FirestoreService } from '../firestore/firestore.service';
 import { CurrencyService } from '../currency/currency.service';
+import { HistoryService } from '../history/history.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class CartService {
   private items: Tour[] = [];
   private cartUpdated = new Subject<Tour[]>();
   
-  constructor(private firestoreService: FirestoreService,
-    private currencyService: CurrencyService
+  constructor(
+    private firestoreService: FirestoreService,
+    private currencyService: CurrencyService,
+    private historyService: HistoryService
     ) {}
 
   addToCart(tour: Tour) {

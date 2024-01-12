@@ -9,13 +9,14 @@
       }">
         <!-- <img [src]="tour.imageLink" class="card-img-top" alt="Tour Image"> -->
         <div class="card-body">
-          <h5 class="card-title">{{ tour.name }}</h5>
+          <h5 class="card-title">{{ tour.name | uppercase }}</h5>
           <p class="card-text">{{ tour.description }}</p>
           <button class="btn btn-primary" [routerLink]="['/tours', tour.id]">Show Details</button>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Destination:</strong> {{ tour.destination }}</li>
+            <li class="list-group-item"><strong>Destination:</strong> {{ tour.destination | uppercase }}</li>
             <li class="list-group-item"><strong>Dates:</strong> {{ tour.start_date.seconds*1000 | date }} - {{ tour.end_date.seconds*1000 | date }}</li>
             <li class="list-group-item"><strong>Cena:</strong> {{ tour.convertedPrice }} {{ this.getCurrency() }}</li>
+            <li class="list-group-item"><strong>Ocena:</strong> {{ tour.rating[1] !== 0 ? tour.rating[0]/tour.rating[1] : 5 }}</li>
             <li class="list-group-item"><strong>Pozostałe miejsca:</strong> {{ tour.max_visitors - tour.current_visitors -  this.getNumberOfItemsInCart(tour) }}</li>
           </ul>
           <div class="d-flex justify-content-between align-items-center mt-3">

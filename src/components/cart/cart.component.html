@@ -4,7 +4,6 @@
 
   <div *ngFor="let tour of distinctTours">
     <div *ngIf="getTourCount(tour) > 0" class="cart-item">
-      <input type="checkbox" [(ngModel)]="tour.isSelected">
       <span>{{ tour.name }}: {{ currencyService.convertPrice(tour.price_pln, currencyService.getSelectedCurrency()) }} {{ currencyService.getSelectedCurrency() }}
         x {{ getTourCount(tour) }}
       </span>

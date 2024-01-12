@@ -125,6 +125,13 @@ export class ToursComponent implements OnInit {
     this.updateDisplayedTours();
   }
 
+  calcRating(tour: Tour): number {
+    if (tour.rating[1] === 0) {
+      return 5;
+    }
+    return tour.rating[0]/tour.rating[1];
+  }
+
   private filterTours(tours: Tour[], filterCriteria: any): Tour[] {
     var filterResults =  tours.filter(tour =>
       tour.destination.toLowerCase().includes(filterCriteria.location.toLowerCase()) &&
@@ -132,7 +139,7 @@ export class ToursComponent implements OnInit {
       (filterCriteria.priceRange.max === null || tour.price_pln <= filterCriteria.priceRange.max) &&
       (filterCriteria.dateRange.start === null || tour.start_date >= Timestamp.fromDate(new Date( filterCriteria.dateRange.start))) &&
       (filterCriteria.dateRange.end === null || tour.end_date <= Timestamp.fromDate(new Date(filterCriteria.dateRange.end))) &&
-      (filterCriteria.rating === null || tour.rating[0]/tour.rating[1] >= filterCriteria.rating)
+      (filterCriteria.rating === null ||this.calcRating(tour) >= filterCriteria.rating)
     );
 
     this.currentPage = 1;
