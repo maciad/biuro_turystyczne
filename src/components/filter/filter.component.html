@@ -1,34 +1,34 @@
 <div class="filter-bar">
 
     <div>
-        <label for="location">Location:</label>
-        <input type="text" id="location" [(ngModel)]="filterCriteria.location" />
+        <label for="location">Kraj:</label>
+        <input type="text" id="location" (change)="applyFilter()"  [(ngModel)]="filterCriteria.location" />
     </div>
     
     <div>
-        <label for="priceMin">Min Price:</label>
-        <input type="number" id="priceMin" [(ngModel)]="filterCriteria.priceRange.min" [placeholder]="this.minPrice"/>
+        <label for="priceMin">Cena min:</label>
+        <input type="number" id="priceMin" (change)="applyFilter()" [(ngModel)]="filterCriteria.priceRange.min" [placeholder]="this.minPrice"/>
     </div>
     
     <div>
-        <label for="priceMax">Max Price:</label>
-        <input type="number" id="priceMax" [(ngModel)]="filterCriteria.priceRange.max" [placeholder]="this.maxPrice"/>
+        <label for="priceMax">Cena max:</label>
+        <input type="number" id="priceMax" (change)="applyFilter()" [(ngModel)]="filterCriteria.priceRange.max" [placeholder]="this.maxPrice"/>
     </div>
     
     <div>
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" [(ngModel)]="filterCriteria.dateRange.start" />
+        <label for="startDate">Start:</label>
+        <input type="date" id="startDate" (change)="applyFilter()" [(ngModel)]="filterCriteria.dateRange.start" />
     </div>
     
     <div>
-        <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" [(ngModel)]="filterCriteria.dateRange.end" />
+        <label for="endDate">Koniec:</label>
+        <input type="date" id="endDate" (change)="applyFilter()" (onchange)="applyFilter()" [(ngModel)]="filterCriteria.dateRange.end" />
     </div>
     
     <div>
-        <label for="rating">Rating:</label>
-        <input type="number" id="rating" [(ngModel)]="filterCriteria.rating" />
+        <label for="rating">Ocena:</label>
+        <input type="number" id="rating" (change)="applyFilter()"  [(ngModel)]="filterCriteria.rating" />
     </div>
     
-    <button class="btn btn-light " (click)="applyFilter()">Apply Filter</button>
+    <button class="btn btn-light " (click)="applyFilter()">Wyszukaj</button>
 </div>
